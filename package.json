@@ -33,5 +33,20 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt": "~0.4.5"
   },
+  "dependencies": {
+    "async": "*"
+  , "underscore": "*"
+  , "optionall": "*"
+  , "jsbelt": "*"
+  , "fstk": "*"
+  , "request": "*"
+  , "rol": "*"
+  , "natural": "*"
+  , "moment": "*"
+  , "freebase": "*"
+  , "locup": "*"
+  , "amazon-product-api": "*"
+  , "faker": "*"
+  },
   "keywords": []
 }

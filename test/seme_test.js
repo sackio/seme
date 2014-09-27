@@ -1,6 +1,12 @@
 'use strict';
 
-var seme = require('../lib/seme.js');
+var Seme = new require('../lib/seme.js')()
+  , Async = require('async')
+  , _ = require('underscore')
+  , Belt = require('jsbelt')
+  , FSTK = require('fstk')
+;
+
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -22,15 +28,66 @@ var seme = require('../lib/seme.js');
     test.ifError(value)
 */
 
-exports['awesome'] = {
+exports['seme'] = {
   setUp: function(done) {
     // setup here
     done();
   },
-  'no args': function(test) {
-    test.expect(1);
-    // tests here
-    test.equal(seme.awesome(), 'awesome', 'should be awesome.');
+  'setup': function(test) {
+    test.ok(Seme);
+    test.ok(Seme.settings.google);
     test.done();
   },
+  'freebase': function(test){
+    var globals = {};
+    return Async.waterfall([
+      function(cb){
+        return Seme.services.freebase.description('Pink Floyd', Belt.cs(cb, globals, 'desc', 0));
+      }
+    , function(cb){
+        test.ok(globals.desc);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.freebase.description('Pisdafasdfsadfsadfd', Belt.cs(cb, globals, 'desc', 0));
+      }
+    , function(cb){
+        test.ok(!globals.desc);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.freebase.description('Radar', {sentence: true}, Belt.cs(cb, globals, 'desc', 0));
+      }
+    , function(cb){
+        test.ok(globals.desc);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.freebase.topic('/en/william_shakespeare', Belt.cs(cb, globals, 'topic', 0));
+      }
+    , function(cb){
+        test.ok(globals.topic);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.freebase.notable_type('william shakespeare', Belt.cs(cb, globals, 'result', 0));
+      }
+    , function(cb){
+        test.ok(globals.result.name === 'Author');
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.freebase.list('operas', {'max': 50}, Belt.cs(cb, globals, 'result', 0));
+      }
+    , function(cb){
+        //test.ok(globals.result.name === 'Author');
+        console.log(globals.result);
+        return cb();
+      }
+    ], function(err){
+      if (err) console.error(err);
+      test.ok(!err);
+      return test.done();
+    });
+  }
 };
