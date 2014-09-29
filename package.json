@@ -47,6 +47,9 @@
   , "locup": "*"
   , "amazon-product-api": "*"
   , "faker": "*"
+  , "flickrapi": "*"
+  , "nodemw": "*"
+  , "googleplaces": "*"
   },
   "keywords": []
 }

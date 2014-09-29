@@ -80,9 +80,67 @@ exports['seme'] = {
         return Seme.services.freebase.list('operas', {'max': 50}, Belt.cs(cb, globals, 'result', 0));
       }
     , function(cb){
-        //test.ok(globals.result.name === 'Author');
-        console.log(globals.result);
+        test.ok(globals.result);
         return cb();
+      }
+    , function(cb){
+        test.ok(Seme.services.faker.Name.firstName());
+        return cb();
+      }
+    , function(cb){
+        test.ok(Seme.services.braintree.credit_card_numbers);
+        test.ok(Seme.services.braintree.cvv_codes);
+        return cb();
+      }
+    , function(cb){
+        return Async.whilst(function(){ return !Seme.services.flickr; }
+                           , function(next){ return setTimeout(next, 1000); }
+                           , function(){
+                               return Seme.services.flickr.photos.search({'text': 'panda'}
+                                      , Belt.cs(cb, globals, 'result', 1, 0));
+                             });
+      }
+    , function(cb){
+        //console.log(JSON.stringify(globals.result, null, 2));
+        //console.log(_.map(globals.result.photos.photo, Seme.services.flickr.url));
+        test.ok(globals.result);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.amazon.itemSearch({
+          'keywords': 'Pulp fiction',
+          'searchIndex': 'DVD',
+          'responseGroup': 'ItemAttributes,Offers,Images'}
+          , Belt.cs(cb, globals, 'products', 1, 0));
+      }
+    , function(cb){
+        test.ok(globals.products);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.wikisource.getArticle('Frankenstein/Chapter_11'
+        , Belt.cs(cb, globals, 'source', 0));
+      }
+    , function(cb){
+        test.ok(globals.source);
+        //console.log(globals.source);
+        return cb();
+      }
+    , function(cb){
+        var nounInflector = new Seme.services.language.NounInflector();
+        test.ok(nounInflector.pluralize('radius') === 'radii');
+        return cb();
+      }
+    , function(cb){
+        var parameters = {
+          location:[-33.8670522, 151.1957362],
+          types:"restaurant"
+        };
+        return Seme.services.google_places.placeSearch(parameters, function(response){
+          test.ok(response.results);
+          //console.log(response.results);
+          return cb();
+        });
       }
     ], function(err){
       if (err) console.error(err);
