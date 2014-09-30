@@ -94,6 +94,7 @@ exports['seme'] = {
       }
     , function(cb){
         test.ok(globals.products);
+        console.log(JSON.stringify(globals.products));
         return cb();
       }
     , function(cb){
@@ -120,7 +121,7 @@ exports['seme'] = {
       }
     , function(cb){
         test.ok(globals.source);
-        console.log(globals.source);
+        //console.log(globals.source);
         return cb();
       }
     , function(cb){
@@ -136,8 +137,25 @@ exports['seme'] = {
         return Seme.services.google_places.placeSearch(parameters, function(response){
           test.ok(response.results);
           //console.log(response.results);
+          globals.place = Belt._get(response, 'results.0');
           return cb();
         });
+      }
+    , function(cb){
+        return Seme.services.google_places.details(globals.place.place_id, Belt.cs(cb, globals, 'place_details', 1, 0));
+      }
+    , function(cb){
+        //console.log(globals.place_details);
+        test.ok(globals.place_details.photos);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.google_places.photo(Belt._get(globals, 'place_details.photos.0.photo_reference')
+        , Belt.cs(cb, globals, 'photo_path', 1, 0));
+      }
+    , function(cb){
+        test.ok(FSTK._fs.existsSync(globals.photo_path));
+        return cb();
       }
     ], function(err){
       if (err) console.error(err);
