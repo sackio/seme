@@ -127,6 +127,24 @@ exports['seme'] = {
         return cb();
       }
     , function(cb){
+        return Seme.services.wikipedia.getArticle('Abraham_Lincoln'
+        , Belt.cs(cb, globals, 'source', 0));
+      }
+    , function(cb){
+        test.ok(globals.source);
+        //console.log(globals.source);
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.wikiquote.getArticle('Pablo_Picasso'
+        , Belt.cs(cb, globals, 'source', 0));
+      }
+    , function(cb){
+        test.ok(globals.source);
+        console.log(globals.source);
+        return cb();
+      }
+    , function(cb){
         var nounInflector = new Seme.services.language.NounInflector();
         test.ok(nounInflector.pluralize('radius') === 'radii');
         return cb();

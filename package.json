@@ -50,6 +50,7 @@
   , "flickrapi": "*"
   , "nodemw": "*"
   , "googleplaces": "*"
+  , "txtwiki": "git://github.com/sackio/txtwiki.js.git#master"
   },
   "keywords": []
 }
