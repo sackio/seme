@@ -71,7 +71,7 @@ exports['seme'] = {
         test.ok(Seme.services.braintree.cvv_codes);
         return cb();
       }
-    , function(cb){
+    /*, function(cb){
         return Async.whilst(function(){ return !Seme.services.flickr; }
                            , function(next){ return setTimeout(next, 1000); }
                            , function(){
@@ -84,7 +84,7 @@ exports['seme'] = {
         //console.log(_.map(globals.result.photos.photo, Seme.services.flickr.url));
         test.ok(globals.result);
         return cb();
-      }
+      }*/
     , function(cb){
         return Seme.services.amazon.itemSearch({
           'keywords': 'Pulp fiction',
