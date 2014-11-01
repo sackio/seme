@@ -1,0 +1,32 @@
+[4mRunning "jshint:gruntfile" (jshint) task[24m
+[32m>> [39m1 file lint free.
+
+[4mRunning "jshint:lib" (jshint) task[24m
+[32m>> [39m17 files lint free.
+
+[4mRunning "jshint:test" (jshint) task[24m
+[32m>> [39m1 file lint free.
+
+[4mRunning "nodeunit:files" (nodeunit) task[24m
+[32minfo[39m:    node /usr/bin/grunt
+[32minfo[39m:    nodemw v0.3.15 (node.js v0.10.33; linux x64)
+[32minfo[39m:    Using <http://en.wikisource.org:80/w/api.php> as API entry point
+[32minfo[39m:    ----
+[32minfo[39m:    node /usr/bin/grunt
+[32minfo[39m:    nodemw v0.3.15 (node.js v0.10.33; linux x64)
+[32minfo[39m:    Using <http://en.wikipedia.org:80/w/api.php> as API entry point
+[32minfo[39m:    ----
+[32minfo[39m:    node /usr/bin/grunt
+[32minfo[39m:    nodemw v0.3.15 (node.js v0.10.33; linux x64)
+[32minfo[39m:    Using <http://en.wikiquote.org:80/w/api.php> as API entry point
+[32minfo[39m:    ----
+Testing seme_test.js.[32minfo[39m:    Getting content of Frankenstein/Chapter_11...
+[32minfo[39m:    Getting content of Abraham_Lincoln...
+[32minfo[39m:    Getting content of Pablo_Picasso...
+[32minfo[39m:    Getting pages from Category:Heads_of_the_Communist_Party_of_the_Soviet_Union...
+[32minfo[39m:    Getting content of Yuri_Andropov...
+null
+.[32mOK[39m
+[32m>> [39m22 assertions passed (9337ms)
+
+[32mDone, without errors.[39m

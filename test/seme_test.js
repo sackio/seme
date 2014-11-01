@@ -18,7 +18,8 @@ exports['seme'] = {
     test.done();
   },
   'freebase': function(test){
-    var globals = {};
+    var globals = {}
+      , gb = globals;
     return Async.waterfall([
       function(cb){
         return Seme.services.freebase.description('Pink Floyd', Belt.cs(cb, globals, 'desc', 0));
@@ -94,7 +95,7 @@ exports['seme'] = {
       }
     , function(cb){
         test.ok(globals.products);
-        console.log(JSON.stringify(globals.products));
+        //console.log(JSON.stringify(globals.products));
         return cb();
       }
     , function(cb){
@@ -155,6 +156,22 @@ exports['seme'] = {
       }
     , function(cb){
         test.ok(FSTK._fs.existsSync(globals.photo_path));
+        return cb();
+      }
+    , function(cb){
+        return Seme.services.wikipedia.getPagesInCategory('Heads_of_the_Communist_Party_of_the_Soviet_Union'
+        , Belt.cs(cb, gb, 'articles', 0));
+      }
+    , function(cb){
+        test.ok(gb.articles);
+        //console.log(gb.articles);
+        return Seme.services.wikipedia.getArticle(gb.articles[1].title.replace(/\s/g, '_')
+        , Belt.cs(cb, gb, 'source', 0));
+      }
+    , function(cb){
+        test.ok(gb.source);
+        console.log(Seme.services.wikimedia.parseSentences(gb.source));
+
         return cb();
       }
     ], function(err){
