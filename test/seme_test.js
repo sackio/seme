@@ -170,7 +170,7 @@ exports['seme'] = {
       }
     , function(cb){
         test.ok(gb.source);
-        console.log(Seme.services.wikimedia.parseSentences(gb.source));
+        console.log(gb.source);
 
         return cb();
       }
