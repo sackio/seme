@@ -1,7 +1,7 @@
 {
   "name": "seme",
   "description": "Generate semantic representations of real things",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/sackio/seme",
   "author": {
     "name": "Ben Sack",
@@ -43,12 +43,13 @@
   , "rol": "*"
   , "natural": "*"
   , "moment": "*"
-  , "freebase": "*"
+  , "freebase": "3.0"
   , "locup": "*"
   , "amazon-product-api": "*"
   , "faker": "*"
   , "flickrapi": "*"
   , "nodemw": "*"
+  , "pa1d": "*"
   , "googleplaces": "*"
   , "txtwiki": "git://github.com/sackio/txtwiki.js.git#master"
   },
